@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import styles from './ContactForm.module.css';
 
 export default class ContactEditor extends Component {
+  static defaultProps = {
+    allowSymbols: "/[^d]/g, ''",
+  };
+
   state = {
     name: '',
     number: '',
   };
 
   handleChange = event => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
 
     this.setState({
-      [name]: value,
+      [name]: name === 'number' ? value.replace(/[^\-\d]/g, '') : value,
     });
   };
 

@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
+import filterContacts from '../filter/filter';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
-
-const filterContacts = (contacts, filter) => {
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()),
-  );
-};
 
 export default class App extends Component {
   state = {
@@ -59,6 +54,7 @@ export default class App extends Component {
   render() {
     const { contacts, filter } = this.state;
     const filteredContacts = filterContacts(contacts, filter);
+    console.log(filteredContacts);
 
     return (
       <div>
@@ -80,7 +76,7 @@ export default class App extends Component {
   }
 }
 
-App.propTypes = {
+App.prpTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
